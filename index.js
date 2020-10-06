@@ -24,7 +24,6 @@ db.once('open', function() {
   console.log('DB connection made');
 });
 
-
 app.use(expressWinston.logger({
     transports: [
       new winston.transports.Console()
@@ -39,8 +38,6 @@ app.use(expressWinston.logger({
     colorize: true,
     ignoreRoute: function (req, res) { return false; }
   }));
-
-
 
 app.use('/', api);
 app.listen({ port: PORT });
