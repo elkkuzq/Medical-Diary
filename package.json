@@ -10,8 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
+    "express-winston": "^4.0.4",
     "mongoose": "^5.10.7",
-    "winston": "^3.0.0",
-    "express-winston": "^4.0.4"
+    "node-env-run": "^4.0.2",
+    "winston": "^3.0.0"
   }
 }

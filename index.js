@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
@@ -5,15 +6,15 @@ const api = require('./routes');
 var winston = require('winston');
 var expressWinston = require('express-winston');
 
-
-
 const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-let mongoDB = 'mongodb://127.0.0.1:27017';
+let mongoDB = process.env.MONGO_DB_URL;
+
+//let mongoDB = "mongodb+srv://backend:uXZaQqk2hkcMPdN0@cluster0.ioxhb.mongodb.net/live?retryWrites=true&w=majority"
 
 mongoose.connect(mongoDB, { useNewUrlParser: true });
 const db = mongoose.connection;
