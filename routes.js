@@ -15,6 +15,12 @@ api.get('/eveningInput', async function(req, res) {
     return res.status(200).json(eveningInputs);
 });
 
+api.get('/allInput', async function(req, res) {
+    const morningInputs = await MorningInput.find().sort({'date': 'desc'});
+    const eveningInputs = await EveningInput.find().sort({'date': 'desc'});
+    return res.status(200).json({morningInputs, eveningInputs});
+});
+
 api.get('/checkAvailability', async function(req, res) {
     const today = moment().startOf('day')
     const date = {
