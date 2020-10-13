@@ -75,18 +75,26 @@ api.post('/refresh', async function(req, res) {
 });
 
 api.get('/morningInput', verify, async function(req, res) {
-    const morningInputs = await MorningInput.find().sort({'date': 'asc'});
+    const morningInputs = await MorningInput.find({
+        user: req.userId,
+    }).sort({'date': 'asc'});
     return res.status(200).json(morningInputs);
 });
 
 api.get('/eveningInput', verify, async function(req, res) {
-    const eveningInputs = await EveningInput.find().sort({'date': 'asc'});
+    const eveningInputs = await EveningInput.find({
+        user: req.userId,
+    }).sort({'date': 'asc'});
     return res.status(200).json(eveningInputs);
 });
 
 api.get('/allInput', verify, async function(req, res) {
-    const morningInputs = await MorningInput.find().sort({'date': 'asc'});
-    const eveningInputs = await EveningInput.find().sort({'date': 'asc'});
+    const morningInputs = await MorningInput.find({
+        user: req.userId,
+    }).sort({'date': 'asc'});
+    const eveningInputs = await EveningInput.find({
+        user: req.userId,
+    }).sort({'date': 'asc'});
     return res.status(200).json({morningInputs, eveningInputs});
 });
 
@@ -98,9 +106,11 @@ api.get('/checkAvailability', verify, async function(req, res) {
     };
     const todaysMorningInput = await MorningInput.find({
         date,
+        user: req.userId,
     });
     const todaysEveningInput = await EveningInput.find({
         date,
+        user: req.userId,
     });
     return res.status(200).json({
         "morning": todaysMorningInput.length == 0,
@@ -111,6 +121,7 @@ api.get('/checkAvailability', verify, async function(req, res) {
 api.post('/morningInput', verify, async function(req, res) {
     await new MorningInput({
         date: new Date(),
+        user: req.userId,
         ...req.body,
     }).save();
     return res.status(200).json("Sucessfully added morning input");
@@ -119,6 +130,7 @@ api.post('/morningInput', verify, async function(req, res) {
 api.post('/eveningInput', verify, async function(req, res) {
     await new EveningInput({
         date: new Date(),
+        user: req.userId,
         ...req.body,
     }).save();
     return res.status(200).json("Sucessfully added evening input");

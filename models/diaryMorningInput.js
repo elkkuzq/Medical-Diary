@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const DiaryMorningInputSchema = new Schema({
+  user: { type: Schema.ObjectId, ref: 'User', required: true },
   date: { type: Date },
   sleepDuration: { type: Number },
   sleepQuality: { type: Number },
