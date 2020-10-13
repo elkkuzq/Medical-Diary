@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose');
 const api = require('./routes');
 var winston = require('winston');
@@ -11,6 +12,7 @@ const PORT = process.env.PORT || 5000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser())
 
 let mongoDB = process.env.MONGO_DB_URL;
 
