@@ -10,11 +10,20 @@
   "author": "Marko Lazic",
   "license": "ISC",
   "dependencies": {
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-winston": "^4.0.4",
+    "jsonwebtoken": "^8.5.1",
     "moment": "^2.29.0",
     "mongoose": "^5.10.7",
+    "mongoose-data-seed": "^2.1.6",
     "node-env-run": "^4.0.2",
     "winston": "^3.0.0"
+  },
+  "mdSeed": {
+    "seedersFolder": "./seeders",
+    "customSeederTemplate": "./md-seed-template.ejs"
   }
 }
