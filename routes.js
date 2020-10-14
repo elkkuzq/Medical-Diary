@@ -74,6 +74,11 @@ api.post('/refresh', async function(req, res) {
 
 });
 
+api.get('/user', verify, async function(req, res) {
+    const user = await User.findById(req.userId).select('-appleId -refreshToken -__v');
+    return res.status(200).json(user);
+});
+
 api.get('/morningInput', verify, async function(req, res) {
     const morningInputs = await MorningInput.find({
         user: req.userId,
